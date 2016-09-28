@@ -1,0 +1,50 @@
+.jumbotron {
+	opacity: .8;
+	height: 260px;
+	margin-top: -40px;
+	margin-bottom: -20px;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+body {
+	background-image: url("../img/background.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	opacity: 1.5;
+}
+
+.hamburgerInput {
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.submitButton {
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+table, td {
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: .8;
+	text-align: center;
+	margin-top: 30px;
+    position: relative;
+    right: 0px;
+    width: 1000px;
+    border: 3px solid #73AD21;
+    padding: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+table, th {
+	color: black;
+	height: 20px;
+	text-align: center;
+}
