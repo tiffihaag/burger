@@ -3,6 +3,7 @@ var express 		 		= require('express');
 var bodyParser 			= require('body-parser');
 var methodOverride 	= require('method-override')
 var app 						= express(); 
+var path            = require('path');
 
 // override with the X-HTTP-Method-Override header in the request 
 app.use(methodOverride('X-HTTP-Method-Override'))
@@ -43,7 +44,7 @@ var port = 3002;
 app.listen(port);
 
 //get query
-app.get('/', function(req,res) {
+app.get('/index', function(req,res) {
 
   connection.query('SELECT * FROM burgers;', function(err, data) {
     if (err) throw err;
@@ -65,7 +66,7 @@ app.post('/create', function(req, res) {
   connection.query('INSERT INTO burgers (burger) VALUES (?)', [req.body.event], function(err, result) {
     if (err) throw err;
 
-    res.redirect('/');
+    //res.redirect('/');
   });
 });
 
@@ -78,7 +79,7 @@ var PORT = process.env.PORT || 3003;
 app.listen(PORT);
 
 
-
+module.exports = app;
 //orm
 //var orm = require('./config/orm.js');
 
