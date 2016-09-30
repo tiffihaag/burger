@@ -28,6 +28,7 @@ app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
     res.render('home');
+    app.render('home');
 });
  
 app.listen(3001);
@@ -75,6 +76,8 @@ app.use('/*', function(req,res){
 
 var PORT = process.env.PORT || 3003;
 app.listen(PORT);
+
+
 
 //orm
 //var orm = require('./config/orm.js');
