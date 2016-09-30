@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
     res.render('home');
 });
  
-app.listen(3000);
+app.listen(3001);
 
 //--------
 //root get route
@@ -38,7 +38,7 @@ app.listen(3000);
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
 
-var port = 3000;
+var port = 3002;
 app.listen(port);
 
 //get query
@@ -73,7 +73,7 @@ app.use('/*', function(req,res){
    res.send("<h1>Not hungry?</h1>");
 });
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3003;
 app.listen(PORT);
 
 //orm
