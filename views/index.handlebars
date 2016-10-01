@@ -1,5 +1,3 @@
-//what we want to put into the shell
-
 <div class="container">
 	<div class="jumbotron">
 		<h1 class="text-center"><strong>Eat-Da-Burger</strong></h1>
@@ -27,7 +25,7 @@
             <li>
               {{this.burger_name}}
 
-              <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+              <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST">
                 <button type="submit">DEVOUR</button>
               </form>
 

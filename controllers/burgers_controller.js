@@ -19,15 +19,24 @@ router.post('/burgers/create', function (req, res) {
 	});
 });
 
-router.put('/burgers/update/:id', function (req, res) {
-	var condition = 'id = ' + req.params.id;
+router.put('/burgers/update/:burger_name', function(req, res) {
+	var condition = 'burger_id = ' + req.params.id;
+	var objColVals = { devoured : req.body.devoured };
 
-	console.log('condition', condition);
-
-	burger.update({ devoured: req.body.devoured }, condition, function () {
-		res.redirect('/burgers');
+	burger.devourBurger(objColVals, condition, function() {
+		res.redirect('/');
 	});
 });
+
+// router.put('/burgers/update/:burger_name', function (req, res) {
+// 	var condition = 'burger_name = ' + req.params.id;
+
+// 	console.log('condition', condition);
+
+// 	burger.update({ devoured: req.body.devoured }, condition, function () {
+// 		res.redirect('/burgers');
+// 	});
+// });
 
 router.delete('/burgers/delete/:id', function (req, res) {
 	var condition = 'burger_id = ' + req.params.id;
