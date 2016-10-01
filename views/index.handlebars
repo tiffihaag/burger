@@ -22,13 +22,12 @@
   <tr>
     <th>Bite Me!
       <ul>
-        {{#each burger}}
-          {{#unless this.eaten}}
+        {{#each burgers}}
+          {{#unless this.devoured}}
             <li>
-              {{this.name}}
+              {{this.burger_name}}
 
               <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-                <input type="value" name="eaten" value="true">
                 <button type="submit">DEVOUR</button>
               </form>
 

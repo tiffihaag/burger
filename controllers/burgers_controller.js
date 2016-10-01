@@ -1,49 +1,33 @@
 var express = require('express');
 var router = express.Router();
-var burger = require('../models/burger');
+var burger = require('../models/burgers.js');
 
 //Routes
-// router.get('/', function(req, res) {
-// 	burger.allBurgers(function(data) {
-// 		res.render('index', { burgers : data });
-// 	});
-// });
-
 router.get('/', function (req, res) {
 	res.redirect('/burgers');
 });
 
-router.get('/burgers', function (req, res) {
-	var cols = ['burger_name', 'devoured'];
-	var vals = [req.body.burger, req.body.devoured];
-
-	burger.saveBurger(cols, vals, function(result) {
-		res.redirect('/');
+router.get('/burgers', function(req, res) {
+	burger.all(function(data) {
+		res.render('index', { burgers : data });
 	});
 });
 
 router.post('/burgers/create', function (req, res) {
-	cat.create(['name', 'eaten'], [req.body.name, req.body.eaten], function () {
+	burger.create(['burger_name', 'devoured'], [req.body.burger_name, req.body.devoured], function () {
 		res.redirect('/burgers');
 	});
 });
 
 router.put('/burgers/update/:id', function (req, res) {
-	var condition = 'burger_id = ' + req.params.id;
+	var condition = 'id = ' + req.params.id;
 
 	console.log('condition', condition);
 
-	var objColVals = { devoured : req.body.devoured };
-
-	burger.devourBurger(objColVals, condition, function() {
-		res.redirect('/');
+	burger.update({ devoured: req.body.devoured }, condition, function () {
+		res.redirect('/burgers');
 	});
 });
-
-// 	burgers.update({ eaten: req.body.eaten }, condition, function () {
-// 		res.redirect('/burgers');
-// 	});
-// });
 
 router.delete('/burgers/delete/:id', function (req, res) {
 	var condition = 'burger_id = ' + req.params.id;
@@ -54,3 +38,38 @@ router.delete('/burgers/delete/:id', function (req, res) {
 });
 
 module.exports = router;
+
+
+//get query
+// app.get('/index', function(req,res) {
+
+//   connection.query('SELECT * FROM burgers;', function(err, data) {
+//     if (err) throw err;
+
+//     //test it
+//     console.log(data);
+//     res.send(data);
+
+//     res.render('index', {burgers : data});
+//   });
+// });
+
+// //post route -> back to home
+// app.post('/create', function(req, res) {
+
+//   //test it
+//   console.log('You sent, ' + req.body.event);
+
+//   connection.query('INSERT INTO burgers (burger) VALUES (?)', [req.body.event], function(err, result) {
+//     if (err) throw err;
+
+//     //res.redirect('/');
+//   });
+// });
+
+//for if the user doesn't hit the right place
+// app.use('/*', function(req,res){
+//    res.send("<h1>Not hungry?</h1>");
+// });
+
+
