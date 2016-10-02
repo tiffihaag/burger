@@ -15,6 +15,13 @@ var orm = {
 			cb(result);
 		});
 	},
+	devour: function (tableInput, cb) {
+		var queryString = "SELECT * FROM burgers WHERE devoured = '1';";
+		connection.query(queryString, function (err, result) {
+			if (err) throw err;
+			cb(result);
+		});
+	},
 		// vals is an array of values that we want to save to cols
 		// cols are the columns we want to insert the values into
 	create: function (table, cols, vals, cb) {
@@ -40,7 +47,7 @@ var orm = {
 		var queryString = 'UPDATE ' + table;
 
 		queryString = queryString + ' SET ';
-		queryString = queryString + objToSql(objColVals);
+		queryString = queryString + objColVals;
 		queryString = queryString + ' WHERE ';
 		queryString = queryString + condition;
 

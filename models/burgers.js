@@ -6,7 +6,11 @@ var burger = {
 			cb(res);
 		});
 	},
-	// cols and vals are arrays
+	devour: function (cb) {
+		orm.devour('burgers', function (res) {
+			cb(res);
+		});
+	},
 	create: function (cols, vals, cb) {
 		orm.create('burgers', cols, vals, function (res) {
 			cb(res);

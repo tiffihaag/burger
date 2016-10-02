@@ -19,13 +19,14 @@
 <table>
   <tr>
     <th>Bite Me!
+      <br></br>
       <ul>
         {{#each burgers}}
           {{#unless this.devoured}}
             <li>
               {{this.burger_name}}
 
-              <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST">
+              <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST"><input type="hidden" name="devoured" value="1">
                 <button type="submit">DEVOUR</button>
               </form>
 
@@ -37,10 +38,23 @@
     </th>
 
     <th>Ouch! Maybe just nibble me next time.
-      <form action="burgers/delete/{{this.id}}?_method=DELETE" method="POST">
-        <!-- <input type="hidden" name="id" value="{{this.id}}"> -->
-        <button type="submit">DELETE</button>
-      </form>
+    <br></br>
+   <ul>
+    {{#each burgersDevour}}
+      {{#unless this.devoured}}
+        <li>
+          {{this.burger_name}}
+
+          <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST"><input type="hidden" name="devoured" value="0">
+            <button type="submit">DELETE</button>
+          </form>
+
+          {{> burger/delete-burger}}
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+
     </th>
   </tr>
 

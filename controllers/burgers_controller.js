@@ -13,6 +13,12 @@ router.get('/burgers', function(req, res) {
 	});
 });
 
+router.get('/burgers', function(req, res) {
+	burger.devour(function(data) {
+		res.render('index', { burgersDevour : data });
+	});
+});
+
 router.post('/burgers/create', function (req, res) {
 	burger.create(['burger_name', 'devoured'], [req.body.burger_name, req.body.devoured], function () {
 		res.redirect('/burgers');
@@ -20,28 +26,18 @@ router.post('/burgers/create', function (req, res) {
 });
 
 router.put('/burgers/update/:burger_name', function(req, res) {
-	var condition = 'burger_id = ' + req.params.id;
-	var objColVals = { devoured : req.body.devoured };
+	var condition = "burger_name = '"+req.params.burger_name +"'";
+	var objColVals = 'devoured = ' + req.body.devoured;
 
-	burger.devourBurger(objColVals, condition, function() {
+	burger.update(objColVals, condition, function() {
 		res.redirect('/');
 	});
 });
 
-// router.put('/burgers/update/:burger_name', function (req, res) {
-// 	var condition = 'burger_name = ' + req.params.id;
-
-// 	console.log('condition', condition);
-
-// 	burger.update({ devoured: req.body.devoured }, condition, function () {
-// 		res.redirect('/burgers');
-// 	});
-// });
-
 router.delete('/burgers/delete/:id', function (req, res) {
 	var condition = 'burger_id = ' + req.params.id;
 
-	burgers.delete(condition, function () {
+	burger.delete(condition, function () {
 		res.redirect('/');
 	});
 });
