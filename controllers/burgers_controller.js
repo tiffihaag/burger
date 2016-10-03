@@ -20,17 +20,19 @@ router.get('/burgers', function(req, res) {
 });
 
 router.post('/burgers/create', function (req, res) {
-	burger.create(['burger_name', 'devoured'], [req.body.burger_name, req.body.devoured], function () {
+	var columnNames = 'burger_name'; 
+	var objColVals = req.body.newHamburger;
+	burger.create(columnNames, objColVals, function() {
 		res.redirect('/burgers');
+		});  
 	});
-});
 
 router.put('/burgers/update/:burger_name', function(req, res) {
 	var condition = "burger_name = '"+req.params.burger_name +"'";
 	var objColVals = 'devoured = ' + req.body.devoured;
 
 	burger.update(objColVals, condition, function() {
-		res.redirect('/');
+		res.redirect('/burgers');
 	});
 });
 
@@ -38,39 +40,12 @@ router.delete('/burgers/delete/:id', function (req, res) {
 	var condition = 'burger_id = ' + req.params.id;
 
 	burger.delete(condition, function () {
-		res.redirect('/');
+		res.redirect('/burgers');
 	});
 });
 
 module.exports = router;
 
-
-//get query
-// app.get('/index', function(req,res) {
-
-//   connection.query('SELECT * FROM burgers;', function(err, data) {
-//     if (err) throw err;
-
-//     //test it
-//     console.log(data);
-//     res.send(data);
-
-//     res.render('index', {burgers : data});
-//   });
-// });
-
-// //post route -> back to home
-// app.post('/create', function(req, res) {
-
-//   //test it
-//   console.log('You sent, ' + req.body.event);
-
-//   connection.query('INSERT INTO burgers (burger) VALUES (?)', [req.body.event], function(err, result) {
-//     if (err) throw err;
-
-//     //res.redirect('/');
-//   });
-// });
 
 //for if the user doesn't hit the right place
 // app.use('/*', function(req,res){

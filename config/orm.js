@@ -27,18 +27,29 @@ var orm = {
 	create: function (table, cols, vals, cb) {
 		var queryString = 'INSERT INTO ' + table;
 
-		queryString = queryString + ' (';
-		queryString = queryString + cols.toString();
-		queryString = queryString + ') ';
-		queryString = queryString + 'VALUES (';
-		queryString = queryString + printQuestionMarks(vals.length);
-		queryString = queryString + ') ';
+		queryString = queryString + "(";
+		queryString = queryString + cols;
+		queryString = queryString + ") VALUES ('";
+		queryString = queryString + vals;
+		queryString = queryString + "')";
 
 		console.log(queryString);
-
-		connection.query(queryString, vals, function (err, result) {
+		connection.query(queryString, function (err, result) {
 			if (err) throw err;
 			cb(result);
+
+		// queryString = queryString + ' (';
+		// queryString = queryString + cols;
+		// queryString = queryString + ', devoured) ';
+		// queryString = queryString + 'VALUES (';
+		// queryString = queryString + vals;
+		// queryString = queryString + ' , 0) ';
+
+		// console.log(queryString);
+
+		// connection.query(queryString, vals, function (err, result) {
+		// 	if (err) throw err;
+		// 	cb(result);
 		});
 	},
 		// objColVals would be the columns and values that you want to update
