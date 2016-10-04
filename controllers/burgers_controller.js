@@ -13,12 +13,6 @@ router.get('/burgers', function(req, res) {
 	});
 });
 
-router.get('/burgers', function(req, res) {
-	burger.devour(function(data) {
-		res.render('index', { burgersDevour : data });
-	});
-});
-
 router.post('/burgers/create', function (req, res) {
 	var columnNames = 'burger_name'; 
 	var objColVals = req.body.newHamburger;
@@ -27,17 +21,17 @@ router.post('/burgers/create', function (req, res) {
 		});  
 	});
 
-router.put('/burgers/update/:burger_name', function(req, res) {
-	var condition = "burger_name = '"+req.params.burger_name +"'";
+router.put('/burgers/devoured/:burger_name', function(req, res) {
+	var condition = "burger_name = '" + req.params.burger_name + "' ";
 	var objColVals = 'devoured = ' + req.body.devoured;
 
-	burger.update(objColVals, condition, function() {
+	burger.devoured(objColVals, condition, function() {
 		res.redirect('/burgers');
 	});
 });
 
-router.delete('/burgers/delete/:id', function (req, res) {
-	var condition = 'burger_id = ' + req.params.id;
+router.delete('/burgers/delete/:burger_name', function (req, res) {
+	var condition = "burger_name = '" + req.params.burger_name + "' ";
 
 	burger.delete(condition, function () {
 		res.redirect('/burgers');

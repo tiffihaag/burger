@@ -6,8 +6,8 @@ var burger = {
 			cb(res);
 		});
 	},
-	devour: function (cb) {
-		orm.devour('burgers', function (res) {
+	devoured: function (objColVals, condition, cb) {
+		orm.update('burgers', objColVals, condition, function (res) {
 			cb(res);
 		});
 	},

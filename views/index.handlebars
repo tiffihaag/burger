@@ -26,7 +26,7 @@
             <li>
               {{this.burger_name}}
 
-              <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST"><input type="hidden" name="devoured" value="1">
+              <form action="burgers/devoured/{{this.burger_name}}?_method=PUT" method="POST"><input type="hidden" name="devoured" value="1">
                 <button type="submit">DEVOUR</button>
               </form>
 
@@ -39,13 +39,32 @@
 
     <th>Ouch! Maybe just nibble me next time.
     <br></br>
-   <ul>
-    {{#each burgersDevour}}
-      {{#unless this.devoured}}
+      <ul>
+        {{#each burgers}}
+          {{#if devoured}}
+            <form method="POST" action="/burgers/delete/{{this.burger_name}}?_method=DELETE" class="form-inline">
+              <div class="form-group">
+                <label class="sr-only">Devoured burger</label>
+                <p class="form-control-static">{{ burger_name }}</p>
+              </div>
+              <button id="burger-id{{burger_id}}" type="submit" class="btn btn-default">Trash It</button>
+              <hr>
+            </form>
+          {{/if}}
+        {{/each}}
+
+
+
+
+
+
+   
+    {{#each burgersDevoured}}
+      {{#unless this.delete}}
         <li>
           {{this.burger_name}}
-
-          <form action="burgers/update/{{this.burger_name}}?_method=PUT" method="POST"><input type="hidden" name="devoured" value="0">
+          
+          <form action="burgers/devoured/{{this.burger_name}}?_method=POST" method="POST"><input type="hidden" name="allGone" value="0">
             <button type="submit">DELETE</button>
           </form>
 
